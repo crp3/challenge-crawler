@@ -65,8 +65,6 @@ class VultrExtractor:
             attributes = self._extract_unordered_list(unordered_list)
 
             machines.append(self._create_machine(price, attributes))
-        
-        print(machines)
 
         return machines
     
