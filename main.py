@@ -1,11 +1,14 @@
 import sys
+from extractors.hostgator_extractor import HostgatorExtractor
 
 from extractors.vultr_extractor import VultrExtractor
 from utils.output_utils import OutputFormatter
 
 if __name__ == '__main__':
     vultrExtractor = VultrExtractor('https://www.vultr.com/products/bare-metal/#pricing')
+    hostgatorExtractor = HostgatorExtractor('https://www.hostgator.com/vps-hosting')
     vultr_machines = vultrExtractor.extract()
+    hostgatorExtractor.extract()
     generic_machines = [vultr_machine.to_generic_machine() for vultr_machine in vultr_machines]
     output_formatter = OutputFormatter(generic_machines)
 
