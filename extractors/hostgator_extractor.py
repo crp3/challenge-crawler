@@ -2,6 +2,7 @@ import requests
 from typing import List
 from bs4 import BeautifulSoup, Tag
 
+from utils.tag_utils import extract_tag_content
 from models.hostgator_machine import HostgatorMachine
 
 class HostgatorExtractor:
@@ -15,8 +16,8 @@ class HostgatorExtractor:
     def _extract_attributes(self, card_item: Tag) -> List[str]:
         unordered_list = card_item.find('ul')
         attributes = []
-        for item in unordered_list.find_all('li'):
-            attributes.append(item.contents[0])
+        for list_item in unordered_list.find_all('li'):
+            attributes.append(extract_tag_content(list_item))
         return attributes
 
     def _extract_price(self, card_item: Tag) -> List[str]:
@@ -38,6 +39,7 @@ class HostgatorExtractor:
         for card_item in parsed_file.find_all('div', {'class': 'pricing-card'}):
             attributes = self._extract_attributes(card_item)
             price = self._extract_price(card_item)
+
             machines.append(self._create_machine(price, attributes))
         
         return machines
