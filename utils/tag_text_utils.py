@@ -14,3 +14,9 @@ def remove_separators(text):
 
 def extract_tag_content(tag):
     return tag.contents[0]
+
+def is_cpu(text):
+    return 'Intel' in text
+
+def is_storage(text):
+    return 'TB' in text

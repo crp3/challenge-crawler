@@ -2,6 +2,7 @@ import sys
 import json
 
 from extractors.vultr_extractor import VultrExtractor
+from utils.output_utils import print_machines, save_json
 
 if __name__ == '__main__':
     vultrExtractor = VultrExtractor('https://www.vultr.com/products/bare-metal/#pricing')
@@ -9,12 +10,7 @@ if __name__ == '__main__':
     generic_machines = [vultr_machine.to_generic_machine() for vultr_machine in vultr_machines]
 
     if '--print' in sys.argv:
-        for machine in generic_machines:
-            print(machine)
+        print_machines(generic_machines)
 
     if '--json' in sys.argv:
-        with open('machines.json', 'w', encoding='utf-8') as output_file:
-            json.dump(
-                [machine.__dict__ for machine in generic_machines],
-                output_file
-            )
+        save_json(generic_machines)
