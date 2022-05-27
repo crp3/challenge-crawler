@@ -5,10 +5,10 @@ from extractors.vultr_extractor import VultrExtractor
 from extractors.hostgator_extractor import HostgatorExtractor
 
 if __name__ == '__main__':
-    vultrExtractor = VultrExtractor('https://www.vultr.com/products/bare-metal/#pricing')
-    hostgatorExtractor = HostgatorExtractor('https://www.hostgator.com/vps-hosting')
-    vultr_machines = vultrExtractor.extract()
-    hostgator_machines = hostgatorExtractor.extract()
+    vultr_extractor = VultrExtractor('https://www.vultr.com/products/bare-metal/#pricing')
+    hostgator_extractor = HostgatorExtractor('https://www.hostgator.com/vps-hosting')
+    vultr_machines = vultr_extractor.extract()
+    hostgator_machines = hostgator_extractor.extract()
     generic_machines = [
         vultr_machine.to_generic_machine() for vultr_machine in vultr_machines
     ] + [
