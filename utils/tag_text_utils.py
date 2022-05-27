@@ -12,6 +12,9 @@ def remove_separators(text):
 
     return multiple_replace(separator_mapper, text)
 
+def replace_commas(text):
+    return re.sub(',', '.', text)
+
 def extract_tag_content(tag):
     return tag.contents[0]
 

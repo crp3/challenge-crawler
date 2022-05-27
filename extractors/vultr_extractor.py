@@ -6,7 +6,7 @@ from bs4.element import Tag
 from bs4 import BeautifulSoup
 
 from models.vultr_machine import VultrMachine
-from utils.tag_text_utils import is_cpu, is_storage, remove_separators, extract_tag_content
+from utils.tag_text_utils import is_cpu, is_storage, remove_separators, extract_tag_content, replace_commas
 
 class VultrExtractor:
     def __init__(self, url: str):
@@ -22,7 +22,7 @@ class VultrExtractor:
         price_message = price_headline.find('span')
             
         if price_value:
-            return extract_tag_content(price_value)
+            return replace_commas(extract_tag_content(price_value))
         elif price_message:
             return extract_tag_content(price_message)
     
