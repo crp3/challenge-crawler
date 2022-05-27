@@ -1,5 +1,4 @@
 import sys
-import json
 
 from extractors.vultr_extractor import VultrExtractor
 from utils.output_utils import OutputFormatter
@@ -13,8 +12,8 @@ if __name__ == '__main__':
     if '--print' in sys.argv:
         output_formatter.print_machines()
 
-    if '--json' in sys.argv:
+    if '--save_json' in sys.argv:
         output_formatter.save_json()
 
-    if '--csv' in sys.argv:
+    if '--save_csv' in sys.argv:
         output_formatter.save_csv()
