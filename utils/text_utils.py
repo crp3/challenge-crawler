@@ -12,6 +12,9 @@ def remove_separators(text):
 
     return multiple_replace(separator_mapper, text)
 
+def concat_attribute_information(attribute_one, attribute_two):
+    return attribute_one + ' + ' + attribute_two
+
 def replace_commas(text):
     return re.sub(',', '.', text)
 

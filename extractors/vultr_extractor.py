@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 from models.vultr_machine import VultrMachine
 from utils.tag_utils import extract_tag_content
-from utils.text_utils import is_cpu, is_storage, remove_separators, replace_commas
+from utils.text_utils import is_cpu, is_storage, remove_separators, replace_commas, concat_attribute_information
 
 class VultrExtractor:
     def __init__(self, url: str):
@@ -45,21 +45,21 @@ class VultrExtractor:
             if is_storage(attributes[1]):
                 return VultrMachine(
                     price,
-                    attributes[0] + ' + ' + attributes[1],
+                    concat_attribute_information(attributes[0], attributes[1]),
                     *attributes[2:]
                 )
             if is_cpu(attributes[1]):
                 return VultrMachine(
                     price,
                     attributes[0],
-                    attributes[1] + ' + ' + attributes[2],
+                    concat_attribute_information(attributes[1], attributes[2])
                     *attributes[3:]
                 )
         elif len(attributes) == 7:
             return VultrMachine(
                 price,
-                attributes[0] + ' + ' + attributes[1],
-                attributes[2] + ' + ' + attributes[3],
+                concat_attribute_information(attributes[0], attributes[1]),
+                concat_attribute_information(attributes[2], attributes[3]),
                 *attributes[4:]
             )
         else:
