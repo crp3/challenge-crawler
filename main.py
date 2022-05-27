@@ -2,7 +2,7 @@ import sys
 import json
 
 from extractors.vultr_extractor import VultrExtractor
-from utils.output_utils import print_machines, save_json
+from utils.output_utils import print_machines, save_json, save_csv
 
 if __name__ == '__main__':
     vultrExtractor = VultrExtractor('https://www.vultr.com/products/bare-metal/#pricing')
@@ -14,3 +14,6 @@ if __name__ == '__main__':
 
     if '--json' in sys.argv:
         save_json(generic_machines)
+
+    if '--csv' in sys.argv:
+        save_csv(generic_machines)
