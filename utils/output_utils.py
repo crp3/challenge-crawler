@@ -4,23 +4,27 @@ from typing import List
 
 from models.generic_machine import GenericMachine
 
-def print_machines(generic_machines: List[GenericMachine]):
-    for machine in generic_machines:
-        print(machine)
+class OutputFormatter:
+    def __init__(self, generic_machines: List[GenericMachine]):
+        self.generic_machines = generic_machines
 
-def save_json(generic_machines: List[GenericMachine]):
-    with open('machines.json', 'w', encoding='utf-8') as output_file:
-        json.dump(
-            [machine.__dict__ for machine in generic_machines],
-            output_file
-        )
+    def print_machines(self):
+        for machine in self.generic_machines:
+            print(machine)
 
-def save_csv(generic_machines: List[GenericMachine]):
-    fields = generic_machines[-1].__dict__.keys()
-    value_list = [machine.__dict__.values() for machine in generic_machines]
+    def save_json(self):
+        with open('machines.json', 'w', encoding='utf-8') as output_file:
+            json.dump(
+                [machine.__dict__ for machine in self.generic_machines],
+                output_file
+            )
 
-    with open('machines.csv', 'w', encoding='utf-8') as output_file:
-        writer = csv.writer(output_file)
+    def save_csv(self):
+        fields = self.generic_machines[-1].__dict__.keys()
+        value_list = [machine.__dict__.values() for machine in self.generic_machines]
 
-        writer.writerow(fields)
-        writer.writerows(value_list)
+        with open('machines.csv', 'w', encoding='utf-8') as output_file:
+            writer = csv.writer(output_file)
+
+            writer.writerow(fields)
+            writer.writerows(value_list)
