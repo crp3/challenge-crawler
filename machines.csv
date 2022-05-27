@@ -11,3 +11,6 @@ cpu,memory,storage,bandwidth,price
 32 cores /64 threads@ 2.8GHz,512 GB Memory,2 x 480 GB SSD + 3 x 6.4 TB NVMe,15 TB Bandwidth,Contact Us For Pricing
 64 cores /128 threads@ 2.8GHz,1024 GB Memory,2 x 480 GB SSD + 6 x 6.4 TB NVMe,20 TB Bandwidth,Contact Us For Pricing
 128 cores /256 threads@ 2GHz,2048 GB Memory,2 x 480 GB SSD + 10 x 6.4 TB NVMe,25 TB Bandwidth,Contact Us For Pricing
+2 core CPU,2GB RAM,120 GB SSD,Unmetered bandwidth,$23.95/mo
+2 core CPU,4 GB RAM,165 GB SSD,Unmetered bandwidth,$34.95/mo
+4 core CPU,8 GB RAM,240 GB SSD,Unmetered bandwidth,$59.95/mo
