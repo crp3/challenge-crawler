@@ -28,7 +28,7 @@ class VultrExtractor:
     
     def _extract_unordered_list(self, div_unordered_list: List[Tag]) -> List[str]:
         attributes = []
-        for list_item in div_unordered_list.findAll('li'):
+        for list_item in div_unordered_list.find_all('li'):
             attribute_value_list = []
             for content in list_item.contents:
                 if type(content) == Tag:
