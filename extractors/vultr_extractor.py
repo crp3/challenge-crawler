@@ -1,4 +1,3 @@
-
 import requests
 
 from typing import List
@@ -30,13 +29,14 @@ class VultrExtractor:
     def _extract_unordered_list(self, div_unordered_list: List[Tag]) -> List[str]:
         attributes = []
         for list_item in div_unordered_list.findAll('li'):
-            value_string = []
+            attribute_value_list = []
             for content in list_item.contents:
                 if type(content) == Tag:
-                    value_string.append(extract_tag_content(content))
+                    attribute_value_list.append(extract_tag_content(content))
                 else:
-                    value_string.append(remove_separators(content))
-            attributes.append(''.join(value_string))
+                    attribute_value_list.append(remove_separators(content))
+            attribute_string = ''.join(attribute_value_list)
+            attributes.append(attribute_string)
         
         return attributes
 
@@ -74,10 +74,10 @@ class VultrExtractor:
         
         parsed_file = BeautifulSoup(self.file, features='html5lib')
         machines = []
-        for item in parsed_file.select("div[class=col-lg-3]"):
-            unordered_list = item.find('ul')
+        for card_item in parsed_file.select("div[class=col-lg-3]"):
+            unordered_list = card_item.find('ul')
             
-            price = self._extract_price(item)
+            price = self._extract_price(card_item)
             attributes = self._extract_unordered_list(unordered_list)
 
             machines.append(self._create_machine(price, attributes))
