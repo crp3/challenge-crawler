@@ -15,9 +15,6 @@ def remove_separators(text):
 def replace_commas(text):
     return re.sub(',', '.', text)
 
-def extract_tag_content(tag):
-    return tag.contents[0]
-
 def is_cpu(text):
     return 'Intel' in text
 
