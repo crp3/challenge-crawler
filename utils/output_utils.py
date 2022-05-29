@@ -1,5 +1,5 @@
-import json
 import csv
+import json
 from typing import List
 
 from models.generic_machine import GenericMachine

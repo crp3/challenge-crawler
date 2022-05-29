@@ -1,5 +1,3 @@
-import requests
-
 from typing import List
 from bs4.element import Tag
 from bs4 import BeautifulSoup
