@@ -2,17 +2,11 @@ import requests
 from typing import List
 from bs4 import BeautifulSoup, Tag
 
+from extractors.extractor import Extractor
 from utils.tag_utils import extract_tag_content
 from models.hostgator_machine import HostgatorMachine
 
-class HostgatorExtractor:
-    def __init__(self, url: str):
-        self.url = url
-        self.file = None
-
-    def _download(self) -> None:
-        self.file = requests.get(self.url).content
-
+class HostgatorExtractor(Extractor):
     '''
         This method receives the tag containing all the card information, extracts the <ul> tag,
         and, in a straight-forward fashion, extracts all the tag content inside the <li> tags.

@@ -4,18 +4,12 @@ from typing import List
 from bs4.element import Tag
 from bs4 import BeautifulSoup
 
+from extractors.extractor import Extractor
 from models.vultr_machine import VultrMachine
 from utils.tag_utils import extract_tag_content
 from utils.text_utils import is_cpu, is_storage, remove_separators, replace_commas, concat_attribute_information
 
-class VultrExtractor:
-    def __init__(self, url: str):
-        self.url: str = url
-        self.file = None
-
-    def _download(self) -> None:
-        self.file = requests.get(self.url).content
-
+class VultrExtractor(Extractor):
     '''
         This html page contains a pattern for pricing. 
         The price headline is a <span> tag and inside of it there is either a <b> tag or another <span> tag.
