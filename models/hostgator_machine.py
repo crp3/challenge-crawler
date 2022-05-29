@@ -9,12 +9,3 @@ class HostgatorMachine:
     storage: str
     bandwidth: str
     price:str
-
-    def to_generic_machine(self):
-        return GenericMachine(
-            self.cpu,
-            self.memory,
-            self.storage,
-            self.bandwidth,
-            self.price
-        )

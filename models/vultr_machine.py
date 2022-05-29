@@ -11,12 +11,3 @@ class VultrMachine:
     memory: str
     bandwidth: str
     network: str
-
-    def to_generic_machine(self) -> GenericMachine:
-        return GenericMachine(
-            self.cpu,
-            self.memory,
-            self.storage,
-            self.bandwidth,
-            self.price
-        )
