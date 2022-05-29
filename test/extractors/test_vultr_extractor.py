@@ -13,4 +13,4 @@ class TestVultrExtractor(unittest.TestCase):
             cls.extractor.file = vultr_file
             machines = cls.extractor.extract()
             for machine in machines:
-                assert type(machine) == VultrMachine
+                cls.assertEqual(type(machine), VultrMachine)

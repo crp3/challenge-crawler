@@ -13,4 +13,4 @@ class TestHostgatorExtractor(unittest.TestCase):
             cls.extractor.file = vultr_file
             machines = cls.extractor.extract()
             for machine in machines:
-                assert type(machine) == HostgatorMachine
+                cls.assertEqual(type(machine), HostgatorMachine)

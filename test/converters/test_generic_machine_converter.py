@@ -6,7 +6,7 @@ from models.hostgator_machine import HostgatorMachine
 from converters.generic_machine_converter import GenericMachineConverter
 
 class TestGenericMachineConverter(unittest.TestCase):
-    def test_convert_vultr_machine(vultr_machine):
+    def test_convert_vultr_machine(self):
         vultr_machine = VultrMachine(
             '$395',
             '100 SSD',
@@ -24,9 +24,9 @@ class TestGenericMachineConverter(unittest.TestCase):
             vultr_machine.price
         )
 
-        assert GenericMachineConverter.convert(vultr_machine) == expected
+        self.assertEqual(GenericMachineConverter.convert(vultr_machine), expected)
         
-    def test_convert_hostgator_machine(hostgator_machine):
+    def test_convert_hostgator_machine(self):
         hostgator_machine = HostgatorMachine(
             '16GB RAM',
             '24 cores',
@@ -43,4 +43,4 @@ class TestGenericMachineConverter(unittest.TestCase):
             hostgator_machine.price
         )
 
-        assert GenericMachineConverter.convert(hostgator_machine) == expected
+        self.assertEqual(GenericMachineConverter.convert(hostgator_machine), expected)

@@ -11,32 +11,32 @@ class TestTextUtils(unittest.TestCase):
         text = 'a c a c'
         expected = 'b d b d'
 
-        assert expected == multiple_replace(mapper, text)
+        self.assertEqual(expected, multiple_replace(mapper, text))
     
     def test_remove_separators(self):
         text = '\n aaa \t'
         expected = ' aaa '
-        assert expected == remove_separators(text)
+        self.assertEqual(expected, remove_separators(text))
 
     def test_concat_attribute_information(self):
         attribute_one = 'foo'
         attribute_two = 'bar'
         expected = 'foo + bar'
-        assert expected == concat_attribute_information(attribute_one, attribute_two)
+        self.assertEqual(expected, concat_attribute_information(attribute_one, attribute_two))
 
     def test_replace_commas(self):
         text = 'a,b,c'
         expected = 'a.b.c'
-        assert expected == replace_commas(text)
+        self.assertEqual(expected, replace_commas(text))
 
     def test_is_cpu_true(self):
-        assert is_cpu('any string with Intel')
+        self.assertTrue(is_cpu('any string with Intel'))
 
     def test_is_cpu_false(self):
-        assert not is_cpu('any string without it')
+        self.assertFalse(is_cpu('any string without it'))
     
     def test_is_storage_true(self):
-        assert is_storage('Some TB')
+        self.assertTrue(is_storage('Some TB'))
 
     def test_is_storage_false(self):
-        assert not is_storage('None')
+        self.assertFalse(is_storage('None'))
