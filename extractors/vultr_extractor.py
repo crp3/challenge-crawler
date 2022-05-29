@@ -16,6 +16,12 @@ class VultrExtractor:
     def _download(self) -> None:
         self.file = requests.get(self.url).content
 
+    '''
+        This html page contains a pattern for pricing. 
+        The price headline is a <span> tag and inside of it there is either a <b> tag or another <span> tag.
+        This pattern gives us a tag-type separation ease, since if the price is a value, like $6000, it will be highlighted by a <b> tag.
+        If it is a message, though, it will be inside a <span> tag, and hence it is just necessary to find a single one of this, since it doesn't contain any other tags alike.
+    '''
     def _extract_price(self, item_div: Tag) -> str:
         price_headline = item_div.find('span')
         price_value = price_headline.find('b')
@@ -26,6 +32,12 @@ class VultrExtractor:
         elif price_message:
             return extract_tag_content(price_message)
     
+    '''
+        To search for all the attributes of each card, like storage, cpu etc, it is necessary to fetch all of the <li> tags and extract its content.
+        However, the content inside each item is a set of tags, which can be a simple string, or a text highlighted by a <b> tag. 
+        So, to in order to extract it, it is necessary to process each of the item's content and append it to a list, to later concatenate on a string.
+        Also, some of the items had separators, so a function to remove all the separator characters needed to be designed.
+    '''
     def _extract_unordered_list(self, div_unordered_list: List[Tag]) -> List[str]:
         attributes = []
         for list_item in div_unordered_list.find_all('li'):
@@ -40,6 +52,15 @@ class VultrExtractor:
         
         return attributes
 
+    '''
+        This method is necessary to ensure all attributes contains the same type of information.
+        The method above extracts the list's content and ensures it is a formatted string. 
+        However, this list only contains a pattern for ordering (e.g. cpu comes after storage), but the quantity of items concerning each subject is not defined
+        (e.g. you could have multiple lines about cpu).
+        Hence, in order to define if an attribute is CPU or Storage (only two corner cases this page falls in), a couple of heuristic functions were created, [is_cpu, is_storage]
+        Also, another corner case is that the card item contains seven attributes in the unordered_list, in that case, the first two attributes are storage-related and the second two are cpu-related
+        Other than that, all other attributes fall on the same ordering and quantity as specified in the VultrMachine class model, so no extra processing is necessary. 
+    '''
     def _create_machine(self, price: str, attributes: List[str]) -> VultrMachine:
         if len(attributes) == 6:
             if is_storage(attributes[1]):
@@ -68,6 +89,12 @@ class VultrExtractor:
                 *attributes
             )
 
+    '''
+        The main function of this extractor consists on using a css selector to find the cards. 
+        A CSS Selector is perfect when you want to be strict certain attributes on bs4.
+        This was necessary because there is another <div> with the same class of the cards at the bottom of the page.
+        This function does little than finding the unordered list and calling the specific function to extract the price, the other attributes and creating the machine object.
+    '''
     def extract(self) -> List[VultrMachine]:
         if self.file is None:
             self._download()
