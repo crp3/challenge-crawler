@@ -67,7 +67,8 @@ The output will be shown on the console, but the files will be lost, since there
 
 `docker run -it challenge-crawler bash`
 
-To access the bash console inside the container, once there, it is possible to just type 
+To access the bash console inside the container.
+Once there, it is possible to just type 
 
 `python main.py --print --save_json`, for example, and see the `machines.json` file there!
 
