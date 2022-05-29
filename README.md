@@ -70,3 +70,13 @@ The output will be shown on the console, but the files will be lost, since there
 To access the bash console inside the container, once there, it is possible to just type 
 
 `python main.py --print --save_json`, for example, and see the `machines.json` file there!
+
+## Testing
+
+To test this project, run 
+
+`python -m unittest`
+
+To see all modules tested, run 
+
+`python -m unittest -v`
